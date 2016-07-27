@@ -37,7 +37,7 @@ public abstract class AbstractItem {
 	 *
 	 * @return the name
 	 */
-	protected String getName() {
+	public String getName() {
 		return name;
 	}
 
@@ -46,7 +46,7 @@ public abstract class AbstractItem {
 	 *
 	 * @return the price
 	 */
-	protected BigDecimal getPrice() {
+	public BigDecimal getPrice() {
 		return price;
 	}
 

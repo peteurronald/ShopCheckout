@@ -3,6 +3,8 @@
  */
 package checkout;
 
+import java.math.BigDecimal;
+
 /**
  * Represents a checkout service.
  * 
@@ -10,5 +12,13 @@ package checkout;
  *
  */
 public interface CheckoutService {
-	//TODO implementation.
+	
+	/**
+	 * Total cost.
+	 *
+	 * @param cart the cart
+	 * @return the big decimal
+	 */
+	public BigDecimal getTotalCost(Cart cart);
+	
 }

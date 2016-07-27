@@ -3,6 +3,10 @@
  */
 package checkout;
 
+import item.AbstractItem;
+
+import java.util.List;
+
 /**
  * Represents a shopping cart.
  * 
@@ -10,5 +14,18 @@ package checkout;
  *
  */
 public interface Cart {
-	//TODO implementation.
+	
+	/**
+	 * Put.
+	 *
+	 * @param item the item
+	 */
+	public void put(AbstractItem item);
+	
+	/**
+	 * Gets the items.
+	 *
+	 * @return the items
+	 */
+	public List<AbstractItem> getItems();
 }
