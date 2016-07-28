@@ -17,7 +17,7 @@ import checkout.CartImpl;
  * @author Peter
  *
  */
-public class ThreeForTwoOffer implements Offer{
+public class ThreeForTwoOfferImpl implements Offer{
 
 	/* (non-Javadoc)
 	 * @see offer.Offer#execute(checkout.Cart, java.lang.String)

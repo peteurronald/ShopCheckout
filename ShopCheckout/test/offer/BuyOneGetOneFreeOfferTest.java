@@ -53,7 +53,7 @@ public class BuyOneGetOneFreeOfferTest {
 	 */
 	@Before
 	public void setUp() throws Exception {
-		offer = new BuyOneGetOneFreeOffer();
+		offer = new BuyOneGetOneFreeOfferImpl();
 		cart = new CartImpl();
 	}
 

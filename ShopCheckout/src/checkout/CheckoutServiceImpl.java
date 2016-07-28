@@ -9,9 +9,9 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.List;
 
-import offer.BuyOneGetOneFreeOffer;
+import offer.BuyOneGetOneFreeOfferImpl;
 import offer.Offer;
-import offer.ThreeForTwoOffer;
+import offer.ThreeForTwoOfferImpl;
 
 /**
  * Implements a checkout service.
@@ -43,7 +43,7 @@ public class CheckoutServiceImpl implements CheckoutService{
 	 */
 	@Override
 	public BigDecimal getTotalCostBuyOneGetOneFree(Cart cart, String itemId) {
-		offer = new BuyOneGetOneFreeOffer();
+		offer = new BuyOneGetOneFreeOfferImpl();
 		Cart offerCart = offer.execute(cart, itemId);
 		BigDecimal totalCost = getTotalCost(offerCart);
 		return totalCost;
@@ -51,7 +51,7 @@ public class CheckoutServiceImpl implements CheckoutService{
 	
 	@Override
 	public BigDecimal getTotalCostThreeForTwo(Cart cart, String itemId) {
-		offer = new ThreeForTwoOffer();
+		offer = new ThreeForTwoOfferImpl();
 		Cart offerCart = offer.execute(cart, itemId);
 		BigDecimal totalCost = getTotalCost(offerCart);
 		return totalCost;

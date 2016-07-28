@@ -17,7 +17,7 @@ import checkout.CartImpl;
  * @author Peter
  *
  */
-public class BuyOneGetOneFreeOffer implements Offer{
+public class BuyOneGetOneFreeOfferImpl implements Offer{
 
 	
 	/* (non-Javadoc)

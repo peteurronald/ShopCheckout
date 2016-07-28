@@ -48,7 +48,7 @@ public class ThreeForTwoOfferTest {
 	 */
 	@Before
 	public void setUp() throws Exception {
-		offer = new ThreeForTwoOffer();
+		offer = new ThreeForTwoOfferImpl();
 		cart = new CartImpl();
 	}
 
