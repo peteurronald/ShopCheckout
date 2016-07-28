@@ -8,14 +8,11 @@ import item.AppleImpl;
 import item.OrangeImpl;
 
 import java.math.BigDecimal;
-import java.math.MathContext;
-import java.math.RoundingMode;
 
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Test;
 
 
@@ -29,6 +26,12 @@ import org.junit.Test;
  */
 public class CheckoutServiceImplTest {
 
+	/** The Constant APPLE. */
+	private static final String APPLE = "Apple";
+	
+	/** The Constant ORANGE. */
+	private static final String ORANGE = "Orange";
+	
 	/** The checkout service. */
 	private CheckoutService checkoutService;
 	
@@ -94,139 +97,47 @@ public class CheckoutServiceImplTest {
 	    assertEquals(totalCost.compareTo(expectedCost), 0);
 	}
 	
+	
 	/**
-	 * Test cart multi items.
+	 * Test total cost buy one get one free.
 	 */
 	@Test
-	public void testCartMultiItems() {
-		cart.put(new AppleImpl());
-		cart.put(new AppleImpl());
-		cart.put(new OrangeImpl());
-		cart.put(new AppleImpl());
-		BigDecimal totalCost = checkoutService.getTotalCost(cart);
-	    BigDecimal expectedCost = new BigDecimal("2.05");
+	public void testTotalCostBuyOneGetOneFree() {
+		createMixedCart();
+		BigDecimal totalCost = checkoutService.getTotalCostBuyOneGetOneFree(cart, APPLE);
+	    BigDecimal expectedCost = new BigDecimal("2.70");
 	    assertEquals(totalCost.compareTo(expectedCost), 0);
 	}
 	
 	/**
-	 * Test apple bogof total cost.
+	 * Test total cost three for two.
 	 */
 	@Test
-	public void testAppleBogofTotalCost() {
-		cart.put(new AppleImpl());
-		cart.put(new AppleImpl());
-		cart.put(new OrangeImpl());
-		cart.put(new AppleImpl());
-		BigDecimal totalCost = checkoutService.getAppleBogofTotalCost(cart);
-	    BigDecimal expectedCost = new BigDecimal("1.45");
-	    assertEquals(totalCost.compareTo(expectedCost), 0);
-	}
-	
-	@Test
-	public void test3for2OrangeTotalCost() {
-		createOrangeMixedCart();
-		BigDecimal totalCost = checkoutService.get3for2OrangeTotalCost(cart);
-	    BigDecimal expectedCost = new BigDecimal("1.95");
-	    assertEquals(totalCost.compareTo(expectedCost), 0);
-	}
-	
-	/**
-	 * Test bogof apples.
-	 */
-	@Test
-	public void testBogofApples() {
-		cart.put(new AppleImpl());
-		cart.put(new AppleImpl());
-		cart.put(new OrangeImpl());
-		cart.put(new AppleImpl());
-		BigDecimal totalCost = checkoutService.getAppleBogofTotalCost(cart);
-	    BigDecimal expectedCost = new BigDecimal("1.45");
+	public void testTotalCostThreeForTwo() {
+		createMixedCart();
+		BigDecimal totalCost = checkoutService.getTotalCostThreeForTwo(cart,ORANGE);
+	    BigDecimal expectedCost = new BigDecimal("3.40");
 	    assertEquals(totalCost.compareTo(expectedCost), 0);
 	}
 	
 	
-	
-	
-	/**
-	 * Test apple bogof 3.
-	 */
-	@Test
-	public void testAppleBogof3() {
-		createAppleCart(3);
-		Cart amendedCart = checkoutService.getBogofAppleCart(cart);
-		assertEquals(amendedCart.countItemsLike("Apple"), 2);
-	}
-	
-	/**
-	 * Test apple bogof 5 plus orange.
-	 */
-	@Test
-	public void testAppleBogofMixed() {
-		createAppeMixedCart();
-		Cart amendedCart = checkoutService.getBogofAppleCart(cart);
-		assertEquals(amendedCart.countItemsLike("Apple"), 2);
-	}
-	
-	
-	/**
-	 * Test 3 for 2 orange.
-	 */
-	@Test
-	public void test3for2Oranges() {
-		createOrangeCart(6);
-		Cart amendedCart = checkoutService.get3for2OrangeCart(cart);
-		assertEquals(amendedCart.countItemsLike("Orange"), 4);
-	}
-
-	
-	
-	/**
-	 * Creates the orange cart.
-	 *
-	 * @param oranges the oranges
-	 */
-	private void createOrangeCart(int oranges) {
-		for (int i = 0; i < oranges; i++) {
-			cart.put(new OrangeImpl());
-		}
-	}
-
 	/**
 	 * Creates the mixed cart.
 	 */
-	private void createAppeMixedCart() {
-		cart.put(new AppleImpl());
+	private void createMixedCart() {
 		cart.put(new AppleImpl());
 		cart.put(new OrangeImpl());
+		cart.put(new OrangeImpl());
 		cart.put(new AppleImpl());
+		cart.put(new OrangeImpl());
+		cart.put(new OrangeImpl());
+		cart.put(new AppleImpl());
+		cart.put(new OrangeImpl());
 		cart.put(new AppleImpl());
 		cart.put(new OrangeImpl());
 	}
 	
 	
-	/**
-	 * Creates the orange mixed cart.
-	 */
-	private void createOrangeMixedCart() {
-		cart.put(new AppleImpl());
-		cart.put(new OrangeImpl());
-		cart.put(new OrangeImpl());
-		cart.put(new AppleImpl());
-		cart.put(new OrangeImpl());
-		cart.put(new OrangeImpl());
-	}
-	
-	/**
-	 * Creates the apple cart.
-	 *
-	 * @param apples the apples
-	 */
-	private void createAppleCart(int apples) {
-		for (int i = 0; i < apples; i++) {
-			cart.put(new AppleImpl());
-		}
-		
-	}
 	
 	
 	

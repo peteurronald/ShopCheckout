@@ -6,10 +6,12 @@ package checkout;
 import item.AbstractItem;
 
 import java.math.BigDecimal;
-import java.math.BigInteger;
 import java.math.RoundingMode;
-import java.util.Iterator;
 import java.util.List;
+
+import offer.BuyOneGetOneFreeOffer;
+import offer.Offer;
+import offer.ThreeForTwoOffer;
 
 /**
  * Implements a checkout service.
@@ -19,10 +21,8 @@ import java.util.List;
  */
 public class CheckoutServiceImpl implements CheckoutService{
 
-	/** The Constant APPLE. */
-	private static final String APPLE = "Apple";
-	private static final String ORANGE = "Orange";
-
+	private Offer offer;
+	
 	/* (non-Javadoc)
 	 * @see checkout.CheckoutService#totalCost(checkout.Cart)
 	 */
@@ -42,81 +42,22 @@ public class CheckoutServiceImpl implements CheckoutService{
 	 * @see checkout.CheckoutService#getAppleBogofTotalCost(checkout.Cart)
 	 */
 	@Override
-	public BigDecimal getAppleBogofTotalCost(Cart cart) {
-		Cart bogofAppleCart = getBogofAppleCart(cart);
-		BigDecimal totalCost = getTotalCost(bogofAppleCart);
+	public BigDecimal getTotalCostBuyOneGetOneFree(Cart cart, String itemId) {
+		offer = new BuyOneGetOneFreeOffer();
+		Cart offerCart = offer.execute(cart, itemId);
+		BigDecimal totalCost = getTotalCost(offerCart);
+		return totalCost;
+	}
+	
+	@Override
+	public BigDecimal getTotalCostThreeForTwo(Cart cart, String itemId) {
+		offer = new ThreeForTwoOffer();
+		Cart offerCart = offer.execute(cart, itemId);
+		BigDecimal totalCost = getTotalCost(offerCart);
 		return totalCost;
 	}
 	
 	
-	/* (non-Javadoc)
-	 * @see checkout.CheckoutService#getBogofForApples(checkout.Cart)
-	 */
-	@Override
-	public Cart getBogofAppleCart(Cart cart) {
-		
-		List<AbstractItem> items = cart.getItems();
-		Cart newCart = new CartImpl();
-		int countApples = 0;
-		
-		for (AbstractItem item : items) {
-			
-			boolean isEvenNumberApples = countApples%2 == 0;
-			boolean isApple = item.getName().equalsIgnoreCase(APPLE);
-			
-			if(isApple) {
-				if(isEvenNumberApples) {
-					newCart.put(item);
-				}
-				countApples++;
-			} else {
-				newCart.put(item);
-			}
-			
-			
-		}
-		return newCart;
-	}
-
-	/* (non-Javadoc)
-	 * @see checkout.CheckoutService#get3for2OrangeCart(checkout.Cart)
-	 */
-	@Override
-	public Cart get3for2OrangeCart(Cart cart) {
-		List<AbstractItem> items = cart.getItems();
-		Cart newCart = new CartImpl();
-		int countOrange = 0;
-		
-		for (AbstractItem item : items) {
-			
-			boolean isOrange = item.getName().equalsIgnoreCase(ORANGE);
-			
-			if(isOrange) {
-				countOrange++;
-				if(countOrange < 3) {
-					newCart.put(item);
-				} else {
-					countOrange = 0;
-				}
-			} else {
-				newCart.put(item);
-			}
-			
-			
-		}
-		return newCart;
-	}
-
-	/* (non-Javadoc)
-	 * @see checkout.CheckoutService#get3for2OrangeTotalCost(checkout.Cart)
-	 */
-	@Override
-	public BigDecimal get3for2OrangeTotalCost(Cart cart) {
-		Cart orange3for2Cart = get3for2OrangeCart(cart);
-		BigDecimal totalCost = getTotalCost(orange3for2Cart);
-		return totalCost;
-	}
-
 	
 	
 }

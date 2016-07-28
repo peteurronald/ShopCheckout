@@ -22,37 +22,26 @@ public interface CheckoutService {
 	 */
 	public BigDecimal getTotalCost(Cart cart);
 	
-	/**
-	 * Gets the apple bogof total cost.
-	 *
-	 * @param cart the cart
-	 * @return the apple bogof total cost
-	 */
-	public BigDecimal getAppleBogofTotalCost(Cart cart);
-	
 	
 	/**
-	 * Gets the bogof for apples.
+	 * Gets the total cost buy one get one free.
 	 *
 	 * @param cart the cart
-	 * @return the bogof for apples
+	 * @param itemId the item id
+	 * @return the total cost buy one get one free
 	 */
-	public Cart getBogofAppleCart(Cart cart);
+	public BigDecimal getTotalCostBuyOneGetOneFree(Cart cart, String itemId);
+	
 
-	/**
-	 * Gets the 3 for 2 orange cart.
-	 *
-	 * @param cart the cart
-	 * @return the 3 for 2 orange cart
-	 */
-	public Cart get3for2OrangeCart(Cart cart);
 
+	
 	/**
-	 * Gets the 3 for 2 orange total cost.
+	 * Gets the total cost three for two.
 	 *
 	 * @param cart the cart
-	 * @return the 3 for 2 orange total cost
+	 * @param itemId the item id
+	 * @return the total cost three for two
 	 */
-	public BigDecimal get3for2OrangeTotalCost(Cart cart);
+	public BigDecimal getTotalCostThreeForTwo(Cart cart, String itemId);
 	
 }
