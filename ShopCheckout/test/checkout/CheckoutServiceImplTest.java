@@ -109,6 +109,20 @@ public class CheckoutServiceImplTest {
 	}
 	
 	/**
+	 * Test apple bogof total cost.
+	 */
+	@Test
+	public void testAppleBogofTotalCost() {
+		cart.put(new AppleImpl());
+		cart.put(new AppleImpl());
+		cart.put(new OrangeImpl());
+		cart.put(new AppleImpl());
+		BigDecimal totalCost = checkoutService.getAppleBogofTotalCost(cart);
+	    BigDecimal expectedCost = new BigDecimal("1.45");
+	    assertEquals(totalCost.compareTo(expectedCost), 0);
+	}
+	
+	/**
 	 * Test bogof apples.
 	 */
 	@Test
@@ -142,6 +156,8 @@ public class CheckoutServiceImplTest {
 		Cart amendedCart = checkoutService.getBogofAppleCart(cart);
 		assertEquals(amendedCart.countItemsLike("Apple"), 2);
 	}
+	
+	
 
 	/**
 	 * Creates the mixed cart.
@@ -167,5 +183,7 @@ public class CheckoutServiceImplTest {
 		}
 		
 	}
+	
+	
 	
 }
