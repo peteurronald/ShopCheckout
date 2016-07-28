@@ -122,20 +122,30 @@ public class CheckoutServiceImplTest {
 	    assertEquals(totalCost.compareTo(expectedCost), 0);
 	}
 	
+	@Test
+	public void test3for2OrangeTotalCost() {
+		createOrangeMixedCart();
+		BigDecimal totalCost = checkoutService.get3for2OrangeTotalCost(cart);
+	    BigDecimal expectedCost = new BigDecimal("1.95");
+	    assertEquals(totalCost.compareTo(expectedCost), 0);
+	}
+	
 	/**
 	 * Test bogof apples.
 	 */
 	@Test
-	@Ignore
 	public void testBogofApples() {
 		cart.put(new AppleImpl());
 		cart.put(new AppleImpl());
 		cart.put(new OrangeImpl());
 		cart.put(new AppleImpl());
 		BigDecimal totalCost = checkoutService.getAppleBogofTotalCost(cart);
-	    BigDecimal expectedCost = new BigDecimal("1.20");
+	    BigDecimal expectedCost = new BigDecimal("1.45");
 	    assertEquals(totalCost.compareTo(expectedCost), 0);
 	}
+	
+	
+	
 	
 	/**
 	 * Test apple bogof 3.
@@ -152,17 +162,39 @@ public class CheckoutServiceImplTest {
 	 */
 	@Test
 	public void testAppleBogofMixed() {
-		createMixedCart();
+		createAppeMixedCart();
 		Cart amendedCart = checkoutService.getBogofAppleCart(cart);
 		assertEquals(amendedCart.countItemsLike("Apple"), 2);
 	}
 	
 	
+	/**
+	 * Test 3 for 2 orange.
+	 */
+	@Test
+	public void test3for2Oranges() {
+		createOrangeCart(6);
+		Cart amendedCart = checkoutService.get3for2OrangeCart(cart);
+		assertEquals(amendedCart.countItemsLike("Orange"), 4);
+	}
+
+	
+	
+	/**
+	 * Creates the orange cart.
+	 *
+	 * @param oranges the oranges
+	 */
+	private void createOrangeCart(int oranges) {
+		for (int i = 0; i < oranges; i++) {
+			cart.put(new OrangeImpl());
+		}
+	}
 
 	/**
 	 * Creates the mixed cart.
 	 */
-	private void createMixedCart() {
+	private void createAppeMixedCart() {
 		cart.put(new AppleImpl());
 		cart.put(new AppleImpl());
 		cart.put(new OrangeImpl());
@@ -171,6 +203,18 @@ public class CheckoutServiceImplTest {
 		cart.put(new OrangeImpl());
 	}
 	
+	
+	/**
+	 * Creates the orange mixed cart.
+	 */
+	private void createOrangeMixedCart() {
+		cart.put(new AppleImpl());
+		cart.put(new OrangeImpl());
+		cart.put(new OrangeImpl());
+		cart.put(new AppleImpl());
+		cart.put(new OrangeImpl());
+		cart.put(new OrangeImpl());
+	}
 	
 	/**
 	 * Creates the apple cart.

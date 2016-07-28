@@ -21,6 +21,7 @@ public class CheckoutServiceImpl implements CheckoutService{
 
 	/** The Constant APPLE. */
 	private static final String APPLE = "Apple";
+	private static final String ORANGE = "Orange";
 
 	/* (non-Javadoc)
 	 * @see checkout.CheckoutService#totalCost(checkout.Cart)
@@ -75,6 +76,45 @@ public class CheckoutServiceImpl implements CheckoutService{
 			
 		}
 		return newCart;
+	}
+
+	/* (non-Javadoc)
+	 * @see checkout.CheckoutService#get3for2OrangeCart(checkout.Cart)
+	 */
+	@Override
+	public Cart get3for2OrangeCart(Cart cart) {
+		List<AbstractItem> items = cart.getItems();
+		Cart newCart = new CartImpl();
+		int countOrange = 0;
+		
+		for (AbstractItem item : items) {
+			
+			boolean isOrange = item.getName().equalsIgnoreCase(ORANGE);
+			
+			if(isOrange) {
+				countOrange++;
+				if(countOrange < 3) {
+					newCart.put(item);
+				} else {
+					countOrange = 0;
+				}
+			} else {
+				newCart.put(item);
+			}
+			
+			
+		}
+		return newCart;
+	}
+
+	/* (non-Javadoc)
+	 * @see checkout.CheckoutService#get3for2OrangeTotalCost(checkout.Cart)
+	 */
+	@Override
+	public BigDecimal get3for2OrangeTotalCost(Cart cart) {
+		Cart orange3for2Cart = get3for2OrangeCart(cart);
+		BigDecimal totalCost = getTotalCost(orange3for2Cart);
+		return totalCost;
 	}
 
 	

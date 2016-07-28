@@ -5,6 +5,7 @@ package checkout;
 
 import java.math.BigDecimal;
 
+// TODO: Auto-generated Javadoc
 /**
  * Represents a checkout service.
  * 
@@ -37,5 +38,21 @@ public interface CheckoutService {
 	 * @return the bogof for apples
 	 */
 	public Cart getBogofAppleCart(Cart cart);
+
+	/**
+	 * Gets the 3 for 2 orange cart.
+	 *
+	 * @param cart the cart
+	 * @return the 3 for 2 orange cart
+	 */
+	public Cart get3for2OrangeCart(Cart cart);
+
+	/**
+	 * Gets the 3 for 2 orange total cost.
+	 *
+	 * @param cart the cart
+	 * @return the 3 for 2 orange total cost
+	 */
+	public BigDecimal get3for2OrangeTotalCost(Cart cart);
 	
 }
