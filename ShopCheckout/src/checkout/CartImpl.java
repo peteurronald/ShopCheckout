@@ -37,4 +37,18 @@ public class CartImpl implements Cart{
 		return items;
 	}
 
+	/* (non-Javadoc)
+	 * @see checkout.Cart#countItemsLike(java.lang.String)
+	 */
+	@Override
+	public int countItemsLike(String name) {
+		int count = 0;
+		for (AbstractItem item : items) {
+			if(item.getName().equalsIgnoreCase(name)) {
+				count++;
+			}
+		}
+		return count;
+	}
+
 }

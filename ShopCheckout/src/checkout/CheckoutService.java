@@ -21,4 +21,21 @@ public interface CheckoutService {
 	 */
 	public BigDecimal getTotalCost(Cart cart);
 	
+	/**
+	 * Gets the apple bogof total cost.
+	 *
+	 * @param cart the cart
+	 * @return the apple bogof total cost
+	 */
+	public BigDecimal getAppleBogofTotalCost(Cart cart);
+	
+	
+	/**
+	 * Gets the bogof for apples.
+	 *
+	 * @param cart the cart
+	 * @return the bogof for apples
+	 */
+	public Cart getBogofAppleCart(Cart cart);
+	
 }

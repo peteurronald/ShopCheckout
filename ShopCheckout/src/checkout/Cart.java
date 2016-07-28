@@ -28,4 +28,12 @@ public interface Cart {
 	 * @return the items
 	 */
 	public List<AbstractItem> getItems();
+	
+	/**
+	 * Count items like.
+	 *
+	 * @param name the name
+	 * @return the int
+	 */
+	public int countItemsLike(String name);
 }
